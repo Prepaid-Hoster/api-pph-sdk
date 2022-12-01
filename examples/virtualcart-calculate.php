@@ -22,7 +22,17 @@ foreach ($cart->get("data.products") as $product) {
 
 echo "Summe der Bestellung: ".$cart->get("data.summary.sum").PHP_EOL;
 
-// print_r($cart->toArray());
+// KVM Root Server
+// - Betriebssystem: Linux - 0
+// - Prozessor: 2 Kerne garantiert - 2.75
+// - RAM: 2GB RAM garantiert - 1.5
+// - NVMe SSD Speicher: 50GB SSD - 2
+// - Netzwerkgeschwindigkeit: bis zu 600 MBit/s - 0
+// - Inklusiv Domains: 0 - 0
+// - VCP Cloud Manager: Inklusive - 0
+// - GANZSCHOENEPYC20 = wiederkehrend 20% - -1.25
+// Gesamt: 5
+// Summe der Bestellung: 5
 
 // Array
 //(
