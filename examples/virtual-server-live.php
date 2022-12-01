@@ -1,6 +1,6 @@
 <?php
 
-$hosting = include "api.php";
+$hosting = include "hosting.php";
 
 // Server-Status
 echo "Server-Status: ".$hosting->read("status")->get("data.status").PHP_EOL;
@@ -15,8 +15,15 @@ $maxDiskSpace = $diskSpaceData->get('data.disk-space.size');
 
 echo "Festplatte: ".round($usedDiskSpace, 1)." GB von ".round($maxDiskSpace, 1).PHP_EOL;
 
-// Tasks
-$tasks = $hosting->read('tasks');
-print_r($tasks->toArray());
+// Memory
+$memoryData = $hosting->read('live', ['methods' => 'memory-usage']);
+$totalMem = $memoryData->get('data.memory-usage.mem-total');
+$freeMem = $memoryData->get('data.memory-usage.mem-free');
+$memUsed = $totalMem - $freeMem;
 
-// Available OS
+echo "Memory: ".round($memUsed, 1)." MB/".round($totalMem, 1) ." used".PHP_EOL;
+
+// Server-Status: running
+// Uptime: 38 Sekunden
+// Festplatte: 0.5 GB von 24.5
+// Memory: 23.5 MB/1024 used
