@@ -1,0 +1,4 @@
+<?php
+
+const API_TOKEN = ""; // Your token
+const HOSTING_ID = ""; // The hosting id (vserver or kvm) you want to use for the examples
