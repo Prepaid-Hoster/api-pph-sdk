@@ -6,7 +6,12 @@ $cart = $apiClient->post('/public/virtual-cart/calculate', [], [
     "promocode" => "GANZSCHOENEPYC20",
     "products" => [
         [
-            "pid" => 269
+            "pid" => 269,
+            "configoptions" => [ // IDs at public/products/269?options=true
+                296 => 911, // Betriebssystem: Windows
+                293 => 887 // CPU: 8 Kerne
+                // Not given values will be minimum automatically
+            ]
         ]
     ]
 ]);
@@ -14,7 +19,13 @@ $cart = $apiClient->post('/public/virtual-cart/calculate', [], [
 foreach ($cart->get("data.products") as $product) {
     echo $product["price"]["label"].PHP_EOL;
     foreach ($product["price"]["items"] as $item) {
-        echo " - ".$item["label"]." - ".$item["price"].PHP_EOL;
+        echo " - ".$item["label"]." - ".$item["price"];
+
+        if(isset($item["meta"]["promotion"])) {
+            echo " (Promotion)";
+        } // if end
+
+        echo PHP_EOL;
     } // foreach end
 
     echo "Gesamt: ".$product["price"]["sum"].PHP_EOL;
@@ -22,265 +33,198 @@ foreach ($cart->get("data.products") as $product) {
 
 echo "Summe der Bestellung: ".$cart->get("data.summary.sum").PHP_EOL;
 
+// echo json_encode($cart->get("data"), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
+
 // KVM Root Server
-// - Betriebssystem: Linux - 0
-// - Prozessor: 2 Kerne garantiert - 2.75
+// - Betriebssystem: Windows Server 2016/2019 (Evaluation Version) - 0
+// - Prozessor: 8 Kerne garantiert - 12.65
 // - RAM: 2GB RAM garantiert - 1.5
 // - NVMe SSD Speicher: 50GB SSD - 2
 // - Netzwerkgeschwindigkeit: bis zu 600 MBit/s - 0
 // - Inklusiv Domains: 0 - 0
 // - VCP Cloud Manager: Inklusive - 0
-// - GANZSCHOENEPYC20 = wiederkehrend 20% - -1.25
-// Gesamt: 5
-// Summe der Bestellung: 5
+// - GANZSCHOENEPYC20 = wiederkehrend 20% - -3.23 (Promotion)
+// Gesamt: 12.92
+// Summe der Bestellung: 12.92
 
-// Array
-//(
-//    [data] => Array
-//        (
-//            [request] => Array
-//                (
-//                    [products] => Array
-//                        (
-//                            [0] => Array
-//                                (
-//                                    [pid] => 269
-//                                )
-//
-//                        )
-//
-//                )
-//
-//            [products] => Array
-//                (
-//                    [0] => Array
-//                        (
-//                            [pid] => 269
-//                            [configOptions] => Array
-//                                (
-//                                )
-//
-//                            [customFields] => Array
-//                                (
-//                                )
-//
-//                            [billingCycle] => monthly
-//                            [price] => Array
-//                                (
-//                                    [label] => KVM Root Server
-//                                    [items] => Array
-//                                        (
-//                                            [0] => Array
-//                                                (
-//                                                    [label] => Betriebssystem: Linux
-//                                                    [price] => 0
-//                                                    [meta] => Array
-//                                                        (
-//                                                            [type] => ProductConfigOption
-//                                                            [option] => Array
-//                                                                (
-//                                                                    [label] => Betriebssystem
-//                                                                    [id] => 296
-//                                                                    [system_value] => Betriebssystem
-//                                                                )
-//
-//                                                            [selected] => Array
-//                                                                (
-//                                                                    [label] => Linux
-//                                                                    [id] => 910
-//                                                                    [system_value] => Linux
-//                                                                )
-//
-//                                                        )
-//
-//                                                )
-//
-//                                            [1] => Array
-//                                                (
-//                                                    [label] => Prozessor: 2 Kerne garantiert
-//                                                    [price] => 2.75
-//                                                    [meta] => Array
-//                                                        (
-//                                                            [type] => ProductConfigOption
-//                                                            [option] => Array
-//                                                                (
-//                                                                    [label] => Prozessor
-//                                                                    [id] => 293
-//                                                                    [system_value] => CPU Cores
-//                                                                )
-//
-//                                                            [selected] => Array
-//                                                                (
-//                                                                    [label] => 2 Kerne garantiert
-//                                                                    [id] => 880
-//                                                                    [system_value] => 2
-//                                                                )
-//
-//                                                        )
-//
-//                                                )
-//
-//                                            [2] => Array
-//                                                (
-//                                                    [label] => RAM: 2GB RAM garantiert
-//                                                    [price] => 1.5
-//                                                    [meta] => Array
-//                                                        (
-//                                                            [type] => ProductConfigOption
-//                                                            [option] => Array
-//                                                                (
-//                                                                    [label] => RAM
-//                                                                    [id] => 294
-//                                                                    [system_value] => RAM
-//                                                                )
-//
-//                                                            [selected] => Array
-//                                                                (
-//                                                                    [label] => 2GB RAM garantiert
-//                                                                    [id] => 985
-//                                                                    [system_value] => 2048
-//                                                                )
-//
-//                                                        )
-//
-//                                                )
-//
-//                                            [3] => Array
-//                                                (
-//                                                    [label] => NVMe SSD Speicher: 50GB SSD
-//                                                    [price] => 2
-//                                                    [meta] => Array
-//                                                        (
-//                                                            [type] => ProductConfigOption
-//                                                            [option] => Array
-//                                                                (
-//                                                                    [label] => NVMe SSD Speicher
-//                                                                    [id] => 295
-//                                                                    [system_value] => Space
-//                                                                )
-//
-//                                                            [selected] => Array
-//                                                                (
-//                                                                    [label] => 50GB SSD
-//                                                                    [id] => 912
-//                                                                    [system_value] => 50
-//                                                                )
-//
-//                                                        )
-//
-//                                                )
-//
-//                                            [4] => Array
-//                                                (
-//                                                    [label] => Netzwerkgeschwindigkeit: bis zu 600 MBit/s
-//                                                    [price] => 0
-//                                                    [meta] => Array
-//                                                        (
-//                                                            [type] => ProductConfigOption
-//                                                            [option] => Array
-//                                                                (
-//                                                                    [label] => Netzwerkgeschwindigkeit
-//                                                                    [id] => 297
-//                                                                    [system_value] => Network Speed
-//                                                                )
-//
-//                                                            [selected] => Array
-//                                                                (
-//                                                                    [label] => bis zu 600 MBit/s
-//                                                                    [id] => 927
-//                                                                    [system_value] => 75000
-//                                                                )
-//
-//                                                        )
-//
-//                                                )
-//
-//                                            [5] => Array
-//                                                (
-//                                                    [label] => Inklusiv Domains: 0
-//                                                    [price] => 0
-//                                                    [meta] => Array
-//                                                        (
-//                                                            [key] => inclusive_domains
-//                                                            [type] => special
-//                                                            [name] => Inklusiv Domains
-//                                                            [value] => 0
-//                                                            [meta] => Array
-//                                                                (
-//                                                                    [next] => Array
-//                                                                        (
-//                                                                            [id] => 19
-//                                                                            [type] => service
-//                                                                            [req_pid] => 269
-//                                                                            [tld_list] => de
-//                                                                            [req_billingcycle] => monthly
-//                                                                            [req_min_amount] => 13.5
-//                                                                            [domains_count] => 1
-//                                                                            [enabled] => 1
-//                                                                            [updated_at] =>
-//                                                                            [created_at] =>
-//                                                                        )
-//
-//                                                                    [hide_in_checkout] => 1
-//                                                                    [domain_value] => 8.99
-//                                                                    [missing_value] => 7.25
-//                                                                )
-//
-//                                                        )
-//
-//                                                )
-//
-//                                            [6] => Array
-//                                                (
-//                                                    [label] => VCP Cloud Manager: Inklusive
-//                                                    [price] => 0
-//                                                    [meta] => Array
-//                                                        (
-//                                                            [key] => vcp_cloud_manager
-//                                                            [type] => special
-//                                                            [name] => VCP Cloud Manager
-//                                                            [value] => Inklusive
-//                                                            [meta] => Array
-//                                                                (
-//                                                                )
-//
-//                                                        )
-//
-//                                                )
-//
-//                                        )
-//
-//                                    [sum] => 6.25
-//                                )
-//
-//                        )
-//
-//                )
-//
-//            [domains] => Array
-//                (
-//                )
-//
-//            [summary] => Array
-//                (
-//                    [label] => Warenkorb
-//                    [items] => Array
-//                        (
-//                            [0] => Array
-//                                (
-//                                    [label] => KVM Root Server
-//                                    [price] => 6.25
-//                                    [meta] => Array
-//                                        (
-//                                        )
-//
-//                                )
-//
-//                        )
-//
-//                    [sum] => 6.25
-//                )
-//
-//        )
-//
-//)
+// {
+//    "request": {
+//        "promocode": "GANZSCHOENEPYC20",
+//        "products": [
+//            {
+//                "pid": 269,
+//                "configoptions": [
+//                    911,
+//                    887
+//                ]
+//            }
+//        ]
+//    },
+//    "products": [
+//        {
+//            "pid": 269,
+//            "configOptions": {
+//                "296": 911,
+//                "293": 887
+//            },
+//            "customFields": [],
+//            "billingCycle": "monthly",
+//            "price": {
+//                "label": "KVM Root Server",
+//                "items": [
+//                    {
+//                        "label": "Betriebssystem: Windows Server 2016\/2019 (Evaluation Version)",
+//                        "price": 0,
+//                        "meta": {
+//                            "type": "ProductConfigOption",
+//                            "option": {
+//                                "label": "Betriebssystem",
+//                                "id": 296,
+//                                "system_value": "Betriebssystem"
+//                            },
+//                            "selected": {
+//                                "label": "Windows Server 2016\/2019 (Evaluation Version)",
+//                                "id": 911,
+//                                "system_value": "Windows Server 2016\/2019 (Evaluation Version)"
+//                            }
+//                        }
+//                    },
+//                    {
+//                        "label": "Prozessor: 8 Kerne garantiert",
+//                        "price": 12.65,
+//                        "meta": {
+//                            "type": "ProductConfigOption",
+//                            "option": {
+//                                "label": "Prozessor",
+//                                "id": 293,
+//                                "system_value": "CPU Cores"
+//                            },
+//                            "selected": {
+//                                "label": "8 Kerne garantiert",
+//                                "id": 887,
+//                                "system_value": "8"
+//                            }
+//                        }
+//                    },
+//                    {
+//                        "label": "RAM: 2GB RAM garantiert",
+//                        "price": 1.5,
+//                        "meta": {
+//                            "type": "ProductConfigOption",
+//                            "option": {
+//                                "label": "RAM",
+//                                "id": 294,
+//                                "system_value": "RAM"
+//                            },
+//                            "selected": {
+//                                "label": "2GB RAM garantiert",
+//                                "id": 985,
+//                                "system_value": "2048"
+//                            }
+//                        }
+//                    },
+//                    {
+//                        "label": "NVMe SSD Speicher: 50GB SSD",
+//                        "price": 2,
+//                        "meta": {
+//                            "type": "ProductConfigOption",
+//                            "option": {
+//                                "label": "NVMe SSD Speicher",
+//                                "id": 295,
+//                                "system_value": "Space"
+//                            },
+//                            "selected": {
+//                                "label": "50GB SSD",
+//                                "id": 912,
+//                                "system_value": "50"
+//                            }
+//                        }
+//                    },
+//                    {
+//                        "label": "Netzwerkgeschwindigkeit: bis zu 600 MBit\/s",
+//                        "price": 0,
+//                        "meta": {
+//                            "type": "ProductConfigOption",
+//                            "option": {
+//                                "label": "Netzwerkgeschwindigkeit",
+//                                "id": 297,
+//                                "system_value": "Network Speed"
+//                            },
+//                            "selected": {
+//                                "label": "bis zu 600 MBit\/s",
+//                                "id": 927,
+//                                "system_value": "75000"
+//                            }
+//                        }
+//                    },
+//                    {
+//                        "label": "Inklusiv Domains: 0",
+//                        "price": 0,
+//                        "meta": {
+//                            "key": "inclusive_domains",
+//                            "type": "special",
+//                            "name": "Inklusiv Domains",
+//                            "value": 0,
+//                            "meta": {
+//                                "next": {
+//                                    "id": 19,
+//                                    "type": "service",
+//                                    "req_pid": "269",
+//                                    "tld_list": "de",
+//                                    "req_billingcycle": "monthly",
+//                                    "req_min_amount": 13.5,
+//                                    "domains_count": 1,
+//                                    "enabled": 1,
+//                                    "updated_at": null,
+//                                    "created_at": null
+//                                },
+//                                "hide_in_checkout": true,
+//                                "domain_value": 8.99,
+//                                "missing_value": 0.5800000000000001
+//                            }
+//                        }
+//                    },
+//                    {
+//                        "label": "VCP Cloud Manager: Inklusive",
+//                        "price": 0,
+//                        "meta": {
+//                            "key": "vcp_cloud_manager",
+//                            "type": "special",
+//                            "name": "VCP Cloud Manager",
+//                            "value": "Inklusive",
+//                            "meta": []
+//                        }
+//                    },
+//                    {
+//                        "label": "GANZSCHOENEPYC20 = wiederkehrend 20%",
+//                        "price": -3.23,
+//                        "meta": {
+//                            "promotion": true,
+//                            "data": {
+//                                "code": "GANZSCHOENEPYC20",
+//                                "label": "GANZSCHOENEPYC20 = wiederkehrend 20%",
+//                                "recurring": true,
+//                                "recurring_for": true,
+//                                "value": 20,
+//                                "type": "Percentage"
+//                            }
+//                        }
+//                    }
+//                ],
+//                "sum": 12.92
+//            }
+//        }
+//    ],
+//    "domains": [],
+//    "summary": {
+//        "label": "Warenkorb",
+//        "items": [
+//            {
+//                "label": "KVM Root Server",
+//                "price": 12.92,
+//                "meta": []
+//            }
+//        ],
+//        "sum": 12.92
+//    }
+//}
