@@ -16,6 +16,7 @@ $cart = $apiClient->post('/public/virtual-cart/calculate', [], [
     ]
 ]);
 
+// Generierten Warenkorb ausgeben
 foreach ($cart->get("data.products") as $product) {
     echo $product["price"]["label"].PHP_EOL;
     foreach ($product["price"]["items"] as $item) {

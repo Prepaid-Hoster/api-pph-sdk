@@ -1,3 +1,7 @@
 /vendor
-/examples/example-config.php
+/*/example-config.php
 /tests
+/.phpunit.result.cache
+/composer.lock
+/.idea
+/phpunit.phar
