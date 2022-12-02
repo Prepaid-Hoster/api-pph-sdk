@@ -1,0 +1,16 @@
+{
+    "name": "prepaid-hoster/api",
+    "autoload": {
+        "psr-4": {
+            "PrepaidHoster\\Api\\": "src/PrepaidHoster/Api"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dennis Ziolkowski",
+            "email": "ziolkowski@prepaid-hoster.de"
+        }
+    ], "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+}

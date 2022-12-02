@@ -1,5 +1,5 @@
 /vendor
-/*/example-config.php
+/examples/example-config.php
 /tests
 /.phpunit.result.cache
 /composer.lock
