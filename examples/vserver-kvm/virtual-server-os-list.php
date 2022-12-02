@@ -1,6 +1,6 @@
 <?php
 
-$hosting = include "hosting.php";
+$hosting = include __DIR__ . "/../hosting.php";
 
 $osList = $hosting->read('os-list');
 print_r($osList->toArray());

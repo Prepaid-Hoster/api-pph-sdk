@@ -1,6 +1,6 @@
 <?php
 
-$hosting = include "hosting.php";
+$hosting = include __DIR__ . "/../hosting.php";
 
 // Backups
 $backupData = $hosting->read('backups');

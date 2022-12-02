@@ -1,7 +1,6 @@
 <?php
 /** @var \PrepaidHoster\Api\ApiClient $apiClient */
-$apiClient = include "api.php";
-
+$apiClient = include __DIR__ . "/../api.php";
 $order = $apiClient->get('/public/virtual-cart/order/status/4ae0b4ad-ddb4-4676-a6c9-41e9783ab433');
 
 echo json_encode($order->get("data"), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);

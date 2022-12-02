@@ -98,14 +98,13 @@ class ApiClient
 
         if ($responseCode >= 400) {
             $message = "";
-            die($bodyStr);
             if($errorResource = @json_decode($bodyStr, true, 512, JSON_THROW_ON_ERROR)) {
-                $message = $errorResource["data"]["message"] ?? "";
+                $message = $errorResource["data"]["message"] ?? $bodyStr;
             } // if end
             throw new ApiCallErrorException("There was an HTTP error in $url: $responseCode - $message", 0, $responseCode, $bodyStr);
         } // if end
 
-        return new ApiResponse($responseCode, $bodyStr, $responseHeaders);
+        return new ApiResponse($url, $responseCode, $bodyStr, $responseHeaders);
     }
 
     /**

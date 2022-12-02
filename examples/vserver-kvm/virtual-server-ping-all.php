@@ -3,7 +3,7 @@
 
 use PrepaidHoster\Api\ApiClient;
 
-$apiClient = include "api.php";
+$apiClient = include "../api.php";
 
 $apiClient->getConfiguration()->setHeader("Accept-Language", "en");
 

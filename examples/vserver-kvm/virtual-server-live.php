@@ -1,6 +1,6 @@
 <?php
 
-$hosting = include "hosting.php";
+$hosting = include __DIR__ . "/../hosting.php";
 
 // Server-Status
 echo "Server-Status: ".$hosting->read("status")->get("data.status").PHP_EOL;

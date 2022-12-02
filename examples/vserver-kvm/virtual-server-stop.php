@@ -1,6 +1,6 @@
 <?php
 
-$hosting = include "hosting.php";
+$hosting = include __DIR__ . "/../hosting.php";
 
 $reinstall = $hosting->write('stop-server');
 print_r($reinstall->toArray());

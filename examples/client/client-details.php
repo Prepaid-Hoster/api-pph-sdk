@@ -3,7 +3,7 @@
 
 use PrepaidHoster\Api\ApiClient;
 
-$apiClient = include "api.php";
+$apiClient = include "../api.php";
 
 $clientData = $apiClient->get("client");
 
@@ -16,3 +16,13 @@ echo "Zip: " . $clientData->get("data.postcode") . PHP_EOL;
 echo "Country: " . $clientData->get("data.country") . PHP_EOL;
 echo "Phone: " . $clientData->get("data.phonenumber") . PHP_EOL;
 echo "Credit: " . $clientData->get("data.credit") . PHP_EOL;
+
+//Firstname: Dennis
+//Lastname: Ziolkowski
+//Email: dezio1991@gmail.com
+//Address: Kurpromenade 48
+//City: Grömitz
+//Zip: 23743
+//Country: DE
+//Phone: 04562 7172656
+//Credit: 21.5

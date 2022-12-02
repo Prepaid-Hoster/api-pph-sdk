@@ -7,30 +7,59 @@ use PrepaidHoster\Api\Support\AdvancedArray;
 class ApiResponse
 {
     /**
-     * The original response
-     * @var mixed
+     * @var mixed The original response
      */
     private mixed $originalResponse;
+
+    /**
+     * @var int The response code
+     */
     private int $responseCode;
 
     /**
-     * The response data
-     * @var AdvancedArray
+     * @var AdvancedArray The response data
      */
     private AdvancedArray $response;
 
     /**
-     * @var AdvancedArray
+     * @var AdvancedArray The response headers
      */
     private AdvancedArray $responseHeaders;
+
+    private string $requestUrl;
+
+    /**
+     * @return AdvancedArray
+     */
+    public function getResponse(): AdvancedArray
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param  AdvancedArray  $response
+     */
+    public function setResponse(AdvancedArray $response): void
+    {
+        $this->response = $response;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRequestUrl(): string
+    {
+        return $this->requestUrl;
+    }
 
     /**
      * @param  int  $code
      * @param  string  $response
      * @param  array  $headers
      */
-    public function __construct(int $code, string $response, array $headers)
+    public function __construct(string $requestUrl, int $code, string $response, array $headers)
     {
+        $this->requestUrl = $requestUrl;
         $this->responseCode = $code;
         $this->originalResponse = $response;
         $this->response = new AdvancedArray($this->toArray());

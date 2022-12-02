@@ -1,6 +1,6 @@
 <?php
 /** @var \PrepaidHoster\Api\ApiClient $apiClient */
-$apiClient = include "api.php";
+$apiClient = include __DIR__ . "/../api.php";
 
 $order = $apiClient->post('/public/virtual-cart/order/place', [], [
     "promocode" => "LASSKNACKEN30",
