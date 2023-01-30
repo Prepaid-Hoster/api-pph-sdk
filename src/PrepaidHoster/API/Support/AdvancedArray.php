@@ -21,16 +21,17 @@ class AdvancedArray
             return $default;
         }
 
-        if (strpos($key, '.') !== false) {
-            $keys = explode('.', $key);
-            foreach ($keys as $innerKey) {
-                if (!array_key_exists($innerKey, $data)) {
-                    return $default;
-                }
-                $data = $data[$innerKey];
-            }
-            return $data;
+        if (strpos($key, '.') === false) {
+            return array_key_exists($key, $data) ? $data[$key] : $default;
         }
-        return array_key_exists($key, $data) ? $data[$key] : $default;
+        
+        $keys = explode('.', $key);
+        foreach ($keys as $innerKey) {
+            if (!array_key_exists($innerKey, $data)) {
+                return $default;
+            }
+            $data = $data[$innerKey];
+        }
+        return $data;
     }
 }
