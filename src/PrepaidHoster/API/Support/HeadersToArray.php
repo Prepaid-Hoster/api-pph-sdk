@@ -15,7 +15,7 @@ class HeadersToArray
             }
 
             // the headers start with HTTP status codes, which do not contain a colon so we can filter them out too
-            $strPos = strpos($headersTmpArray[$i], ":");
+            $strPos = strpos($headersTmpArray[$i], ":"); // returns int|false
             if ($strPos === false) {
                 continue;
             }
