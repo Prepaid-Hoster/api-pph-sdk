@@ -17,7 +17,7 @@ class AdvancedArray
     }
 
     private function getValueByKey($key, array $data, $default) {
-        if (!is_string($key) || empty($key) || !count($data)) {
+        if (is_string($key) === false || empty($key) === true || empty($data) === true) {
             return $default;
         }
 
